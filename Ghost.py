@@ -1,24 +1,51 @@
 import random
+import os
+import pygame.sprite
+
 from Wall import Wall
 
-class Ghost():
+class Ghost(pygame.sprite.Sprite):
 
-    def __init__(self, width, height, x, y):
-        self.width = width # width of sprite
-        self.height = height # height of sprite
-        self.x = x # starting x-coordinate (of upper top-left corner)
-        self.y = y # starting y-coordinate (of upper top-left corner)
+    def __init__(self, fileName, x, y):
+        # Call the parent's constructor
+        pygame.sprite.Sprite.__init__(self)
 
-    def move(self):
+        self.image = pygame.image.load(os.path.join('images', fileName))
+        self.image = pygame.transform.scale(self.image, (100, 100))
+
+        self.rect = self.image.get_rect()
+        self.rect.left = x
+        self.rect.top = y
+
+    def move(self, walls):
         speed = 2 # 2 pixels per move
 
         dx = random.choice([-speed, speed])
         dy = random.choice([-speed, speed])
 
-        self.x += dx
-        self.y += dy
+        self.rect.left += dx
+        self.rect.top += dy
 
-    def collision(self):
+        collision = pygame.sprite.spritecollide(self, walls, False)
+
+        while collision:
+            self.rect.left -= dx
+            self.rect.top -= dy
+
+            dx = random.choice([-speed, speed])
+            dy = random.choice([-speed, speed])
+
+            self.rect.left += dx
+            self.rect.top += dy
+
+            collision = pygame.sprite.spritecollide(self, walls, False)
+
+
+
+
+
+
+
 
 
 
