@@ -1,28 +1,26 @@
-from Player import Player
+import random
+from Wall import Wall
+
+class Ghost():
+
+    def __init__(self, width, height, x, y):
+        self.width = width # width of sprite
+        self.height = height # height of sprite
+        self.x = x # starting x-coordinate (of upper top-left corner)
+        self.y = y # starting y-coordinate (of upper top-left corner)
+
+    def move(self):
+        speed = 2 # 2 pixels per move
+
+        dx = random.choice([-speed, speed])
+        dy = random.choice([-speed, speed])
+
+        self.x += dx
+        self.y += dy
+
+    def collision(self):
 
 
-class Ghost(Player):
 
-    # Change the speed of the ghost
-    def change_speed(self, move_list, ghost, turn, steps, l):
 
-      try:
-        z = move_list[turn][2]
-        if steps < z:
-          self.change_x = move_list[turn][0]
-          self.change_y = move_list[turn][1]
-          steps += 1
-        else:
-          if turn < l:
-            turn += 1
-          elif ghost == "clyde":
-            turn = 2
-          else:
-            turn = 0
 
-          self.change_x = move_list[turn][0]
-          self.change_y = move_list[turn][1]
-          steps = 0
-        return [turn, steps]
-      except IndexError:
-         return [0, 0]
