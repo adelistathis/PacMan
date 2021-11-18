@@ -18,12 +18,18 @@ RED = pygame.Color(255, 0, 0)
 x = 285
 y = 200
 
-pac = Player(30, 30)
+pac = Player( 'pacman_o.png',30, 30)
 inky = Ghost('inky.png', x, y)
 blinky = Ghost('blinky.png', x, y)
 pinky = Ghost('pinky.png', x, y)
 clyde = Ghost('clyde.png', x, y)
 
+sprite_list = pygame.sprite.RenderPlain()
+sprite_list.add(inky)
+sprite_list.add(pac)
+sprite_list.add(blinky)
+sprite_list.add(pinky)
+sprite_list.add(clyde)
 
 ghost_list = pygame.sprite.RenderPlain()
 ghost_list.add(inky)
@@ -42,6 +48,7 @@ while running:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+            running = False
 
     # Create the window
     (width, height) = (606, 606)
@@ -50,7 +57,7 @@ while running:
     pygame.display.set_caption("PacMan")
 
     # Draw the sprites
-    ghost_list.draw(screen)
+    sprite_list.draw(screen)
     wall = Wall(0, 0, 0, 0, BLUE)
     wall_list = wall.setup_room()
     wall_list.draw(screen)
@@ -60,6 +67,7 @@ while running:
     blinky.move(wall_list, count)
     pinky.move(wall_list, count)
     clyde.move(wall_list, count)
+    pac.update()
 
     pygame.display.update()
-    clock.tick(120)
+    clock.tick(60)
