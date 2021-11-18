@@ -43,16 +43,26 @@ running = True
 (width, height) = (606, 606)
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("PacMan")
+wall_list = Pacman.setup_room()
+block_list = Pacman.create_blocks(wall_list, all_sprites_list)
 
 while running:
     count += 1
-
+    clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
-    # Create the window
+
+
+    # Move the ghosts
+    inky.move(wall_list, count)
+    blinky.move(wall_list, count)
+    pinky.move(wall_list, count)
+    clyde.move(wall_list, count)
+    # move pacman
+    pac.update()
 
 
     screen.fill(BLACK)
@@ -61,18 +71,11 @@ while running:
     # Draw the everything
     all_sprites_list.draw(screen)
 
-    # Draw the walls and the blocks
-    wall_list = Pacman.setup_room()
-    block_list = Pacman.create_blocks(wall_list, all_sprites_list)
-
     wall_list.draw(screen)
     block_list.draw(screen)
 
-    # Move the ghosts
-    inky.move(wall_list, count)
-    blinky.move(wall_list, count)
-    pinky.move(wall_list, count)
-    clyde.move(wall_list, count)
+
+
+
 
     pygame.display.flip()
-    clock.tick(120)
