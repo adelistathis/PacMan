@@ -15,6 +15,7 @@ class Ghost(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left = x
         self.rect.top = y
+        self.direction = "UP"
 
     def choose_direction(self):
         a = random.randint(1, 4)
@@ -28,34 +29,34 @@ class Ghost(pygame.sprite.Sprite):
         elif a == 4:
             return "RIGHT"
 
-    def move(self, walls, count):
+    def move(self, walls):
 
         collision = pygame.sprite.spritecollide(self, walls, False)
 
-        # first move
-        if count <= 1:
-            while collision is False:
-                self.rect.top -= 1
-        else:
-            direction = self.choose_direction()
-            while collision is False:
-                if direction == "UP":
-                    self.rect.top -= 1
-                elif direction == "DOWN":
-                    self.rect.top += 1
-                elif direction == "LEFT":
-                    self.rect.left -= 1
-                elif direction == "RIGHT":
-                    self.rect.left += 1
-
-            if direction == "UP":
+        if self.direction == "UP":
+            self.rect.top -= 1
+            while collision:
                 self.rect.top += 1
-            elif direction == "DOWN":
+
+            self.direction = self.choose_direction()
+        elif self.direction == "DOWN":
+            self.rect.top += 1
+            while collision:
                 self.rect.top -= 1
-            elif direction == "LEFT":
+
+            self.direction = self.choose_direction()
+        elif self.direction == "LEFT":
+            self.rect.left -= 1
+            while collision:
                 self.rect.left += 1
-            elif direction == "RIGHT":
+
+            self.direction = self.choose_direction()
+        elif self.direction == "RIGHT":
+            self.rect.left += 1
+            while collision:
                 self.rect.left -= 1
+
+            self.direction = self.choose_direction()
 
 
 
