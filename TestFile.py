@@ -18,7 +18,7 @@ RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 
 x = 285
-y = 200
+y = 195
 
 pac = Player('pacman_o.png', 30, 30)
 inky = Ghost('inky.png', x, y)
@@ -63,7 +63,7 @@ while running:
     pinky.move(wall_list)
     clyde.move(wall_list)
     # move pacman
-    pac.update()
+    pac.update(wall_list)
 
     screen.fill(BLACK)
 
