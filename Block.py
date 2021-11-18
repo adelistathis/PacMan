@@ -4,6 +4,7 @@ import pygame.sprite
 WHITE = pygame.Color(255, 255, 255)
 ORANGE = pygame.Color(255, 165, 0)
 
+
 class Block(pygame.sprite.Sprite):
 
     # Constructor. Pass in the color of the block,
@@ -16,5 +17,9 @@ class Block(pygame.sprite.Sprite):
         # This could also be an image loaded from the disk.
         self.image = pygame.Surface([width, height])
         self.image.fill(ORANGE)
-        self.image.set_colorkey(ORANGE)
-        pygame.draw.rect(self.image, self.image.color)
+
+        # Fetch the rectangle object that has the dimensions of the image
+        # image.
+        # Update the position of this object by setting the values
+        # of rect.x and rect.y
+        self.rect = self.image.get_rect()

@@ -5,6 +5,7 @@ from Ghost import Ghost
 from Wall import Wall
 from Block import Block
 from Player import Player
+import Pacman
 
 pygame.init()
 
@@ -14,6 +15,7 @@ BLACK = pygame.Color(0, 0, 0)
 WHITE = pygame.Color(255, 255, 255)
 GREY = pygame.Color(128, 128, 128)
 RED = pygame.Color(255, 0, 0)
+ORANGE = pygame.Color(255, 165, 0)
 
 x = 285
 y = 200
@@ -24,6 +26,7 @@ blinky = Ghost('blinky.png', x, y)
 pinky = Ghost('pinky.png', x, y)
 clyde = Ghost('clyde.png', x, y)
 
+all_sprites_list = pygame.sprite.RenderPlain()
 
 ghost_list = pygame.sprite.RenderPlain()
 ghost_list.add(inky)
@@ -49,11 +52,15 @@ while running:
     screen.fill(BLACK)
     pygame.display.set_caption("PacMan")
 
-    # Draw the sprites
+    # Draw the ghosts
     ghost_list.draw(screen)
-    wall = Wall(0, 0, 0, 0, BLUE)
-    wall_list = wall.setup_room()
+
+    # Draw the walls and the blocks
+    wall_list = Pacman.setup_room()
+    block_list = Pacman.create_blocks(wall_list, all_sprites_list)
+
     wall_list.draw(screen)
+    block_list.draw(screen)
 
     # Move the ghosts
     inky.move(wall_list, count)
