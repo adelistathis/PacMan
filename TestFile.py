@@ -48,7 +48,9 @@ block_list = Pacman.create_blocks(wall_list, all_sprites_list)
 
 while running:
     count += 1
+    #keeps oop at right speed
     clock.tick(60)
+    #close window event
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -62,8 +64,10 @@ while running:
     pinky.move(wall_list, count)
     clyde.move(wall_list, count)
     # move pacman
-    pac.update()
+    pac.update(wall_list)
 
+    #
+    
 
     screen.fill(BLACK)
 

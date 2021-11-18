@@ -9,16 +9,17 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.center = (xIn,yIn)
-        self.WIDTH = 800
-        self.HEIGHT = 600
+        self.WIDTH = 606
+        self.HEIGHT = 606
         self.SPEED = 10
         self.x_speed = 0
         self.y_speed = 0
 
 
-    def update(self):
-        #self.x_speed = 0
-        #self.y_speed = 0
+    def update(self,wList):
+        hits = pygame.sprite.spritecollide(self, wList, False)
+
+
         keystate = pygame.key.get_pressed()
         if keystate[pygame.K_LEFT]:
             self.x_speed = -self.SPEED
@@ -44,6 +45,11 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > self.HEIGHT:
             self.rect.bottom = self.HEIGHT
             self.y_speed = 0
-
+        hits = pygame.sprite.spritecollide(self, wList, False)
+        if hits:
+            self.rect.x += -self.x_speed
+            self.rect.y += -self.y_speed
+            self.x_speed = 0
+            self.y_speed = 0
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
