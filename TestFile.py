@@ -20,24 +20,30 @@ ORANGE = pygame.Color(255, 165, 0)
 x = 285
 y = 200
 
-pac = Player(30, 30)
+pac = Player('pacman_o.png', 30, 30)
 inky = Ghost('inky.png', x, y)
 blinky = Ghost('blinky.png', x, y)
 pinky = Ghost('pinky.png', x, y)
 clyde = Ghost('clyde.png', x, y)
 
 all_sprites_list = pygame.sprite.RenderPlain()
+all_sprites_list.add(pac)
 
 ghost_list = pygame.sprite.RenderPlain()
 ghost_list.add(inky)
 ghost_list.add(blinky)
 ghost_list.add(pinky)
 ghost_list.add(clyde)
-
+all_sprites_list.add(ghost_list)
 
 clock = pygame.time.Clock()
 count = 0
 running = True
+
+(width, height) = (606, 606)
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("PacMan")
+
 while running:
     count += 1
 
@@ -47,13 +53,13 @@ while running:
             sys.exit()
 
     # Create the window
-    (width, height) = (606, 606)
-    screen = pygame.display.set_mode((width, height))
-    screen.fill(BLACK)
-    pygame.display.set_caption("PacMan")
 
-    # Draw the ghosts
-    ghost_list.draw(screen)
+
+    screen.fill(BLACK)
+
+
+    # Draw the everything
+    all_sprites_list.draw(screen)
 
     # Draw the walls and the blocks
     wall_list = Pacman.setup_room()
@@ -68,5 +74,5 @@ while running:
     pinky.move(wall_list, count)
     clyde.move(wall_list, count)
 
-    pygame.display.update()
+    pygame.display.flip()
     clock.tick(120)
