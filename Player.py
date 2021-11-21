@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 import os
 
@@ -16,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.score = 0
+        self.lives = 3
 
     def update(self, wList):
         hits = pygame.sprite.spritecollide(self, wList, False)
@@ -62,6 +65,23 @@ class Player(pygame.sprite.Sprite):
         for collided in collision:
             collided.kill()
             self.score += 1
+
+    def die(self, ghost_list):
+
+        collision = pygame.sprite.spritecollide(self, ghost_list, False)
+
+        if collision:
+            if self.lives == 0:
+                pygame.quit()
+                sys.exit()
+
+            # Move the Player to their original position
+            self.rect.center = (30, 30)
+            self.lives -= 1
+
+
+
+
 
 
 

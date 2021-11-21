@@ -17,7 +17,7 @@ GREY = pygame.Color(128, 128, 128)
 RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 
-
+# instantiate the Player() and Ghost() objects
 pac = Player('pacman_o.png', 30, 30)
 inky = Ghost('inky.png', 285, 75)
 blinky = Ghost('blinky.png', 285, 75)
@@ -27,7 +27,7 @@ clyde = Ghost('clyde.png', 285, 195)
 all_sprites_list = pygame.sprite.RenderPlain()
 all_sprites_list.add(pac)
 
-# Create the ghosts
+# Add the ghosts to the ghost list and list of all the sprites
 ghost_list = pygame.sprite.RenderPlain()
 ghost_list.add(inky)
 ghost_list.add(blinky)
@@ -70,6 +70,9 @@ while running:
 
     # Give PacMan the ability to eat blocks
     pac.eat_block(block_list)
+
+    # Check if PacMan collided with a ghost
+    pac.die(ghost_list)
 
     screen.fill(BLACK)
 
