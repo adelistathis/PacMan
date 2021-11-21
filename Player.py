@@ -1,12 +1,13 @@
 import pygame
 import os
 
+
 # This class represents the bar at the bottom that the player controls
 class Player(pygame.sprite.Sprite):
     def __init__(self, fileName, xIn, yIn):
         pygame.sprite.Sprite.__init__(self)
         image = pygame.image.load(os.path.join('images', fileName))
-        self.image = pygame.transform.scale(image, (30, 30))
+        self.image = pygame.transform.scale(image, (45, 45))
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)
         self.WIDTH = 606

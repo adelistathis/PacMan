@@ -17,19 +17,17 @@ GREY = pygame.Color(128, 128, 128)
 RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 
-x = 285
-y = 195
 
 pac = Player('pacman_o.png', 30, 30)
-inky = Ghost('inky.png', x, y)
-blinky = Ghost('blinky.png', x, y)
-pinky = Ghost('pinky.png', x, y)
-clyde = Ghost('clyde.png', x, y)
+inky = Ghost('inky.png', 285, 75)
+blinky = Ghost('blinky.png', 285, 75)
+pinky = Ghost('pinky.png', 285, 195)
+clyde = Ghost('clyde.png', 285, 195)
 
 all_sprites_list = pygame.sprite.RenderPlain()
 all_sprites_list.add(pac)
 
-#Create the ghosts
+# Create the ghosts
 ghost_list = pygame.sprite.RenderPlain()
 ghost_list.add(inky)
 ghost_list.add(blinky)
