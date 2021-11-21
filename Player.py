@@ -1,42 +1,48 @@
 import sys
-
 import pygame
 import os
 
 
-# This class represents the bar at the bottom that the player controls
 class Player(pygame.sprite.Sprite):
-    def __init__(self, fileName, xIn, yIn):
+    def __init__(self, fileName, xIn, yIn, lives):
         pygame.sprite.Sprite.__init__(self)
         image = pygame.image.load(os.path.join('images', fileName))
-        self.image = pygame.transform.scale(image, (45, 45))
+        self.image = pygame.transform.scale(image, (40, 40))
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)
-        self.WIDTH = 606
-        self.HEIGHT = 606
-        self.SPEED = 2
+        self.WIDTH = 606 # width of game window
+        self.HEIGHT = 606 # height of game window
+        self.SPEED = 2 # number of pixels PacMan moves in each move
         self.x_speed = 0
         self.y_speed = 0
         self.score = 0
-        self.lives = 3
+        self.lives = lives
 
-    def update(self, wList):
-        hits = pygame.sprite.spritecollide(self, wList, False)
+    def update(self, wall_list):
+        """Gives the player key controls to move their sprite
 
+        Also handles collisions with walls
+
+        :param wall_list: a Group containing all of the Wall() sprites in the game
+        """
 
         keystate = pygame.key.get_pressed()
+
+        # changes x and y speeds depending on which key was pressed by the Player
         if keystate[pygame.K_LEFT]:
             self.x_speed = -self.SPEED
             self.y_speed = 0
-        if keystate[pygame.K_RIGHT]:
+        elif keystate[pygame.K_RIGHT]:
             self.x_speed = self.SPEED
             self.y_speed = 0
-        if keystate[pygame.K_UP]:
+        elif keystate[pygame.K_UP]:
             self.y_speed = -self.SPEED
             self.x_speed = 0
-        if keystate[pygame.K_DOWN]:
+        elif keystate[pygame.K_DOWN]:
             self.y_speed = self.SPEED
             self.x_speed = 0
+
+        # prevents the Player() object from moving off screen
         if self.rect.right > self.WIDTH:
             self.rect.right = self.WIDTH
             self.x_speed = 0
@@ -49,28 +55,52 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > self.HEIGHT:
             self.rect.bottom = self.HEIGHT
             self.y_speed = 0
-        hits = pygame.sprite.spritecollide(self, wList, False)
+
+        # move the Player() object
+        self.rect.x += self.x_speed
+        self.rect.y += self.y_speed
+
+        hits = pygame.sprite.spritecollide(self, wall_list, False)
+        # if there was a collision between the Player() object and a Wall() object
         if hits:
             self.rect.x += -self.x_speed
             self.rect.y += -self.y_speed
             self.x_speed = 0
             self.y_speed = 0
-        self.rect.x += self.x_speed
-        self.rect.y += self.y_speed
 
     def eat_block(self, block_list):
+        """Gives the player the ability to eat Block() sprites
+
+        :param block_list: a Group containing all of the Block() sprites in the game
+        """
 
         collision = pygame.sprite.spritecollide(self, block_list, False)
 
+        # traverses the list of blocks that the Player() collided with
         for collided in collision:
             collided.kill()
             self.score += 1
 
+        # if the player has eaten all of the blocks
+        if self.score == len(block_list):
+            pygame.quit()
+            sys.exit()
+
     def die(self, ghost_list):
+        """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
+        on the screen
+
+        exits the game if the player has lost all of their lives
+
+        :param ghost_list: a Group containing all of the Ghost() sprites in the game
+        """
 
         collision = pygame.sprite.spritecollide(self, ghost_list, False)
 
+        # if there was a collision with a Ghost sprite
         if collision:
+
+            # if the player has lost all of their lives
             if self.lives == 0:
                 pygame.quit()
                 sys.exit()

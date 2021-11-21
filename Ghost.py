@@ -1,11 +1,12 @@
 import random
 import os
-import pygame.sprite
+import pygame
 
 
 class Ghost(pygame.sprite.Sprite):
 
     def __init__(self, fileName, x, y):
+
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
 
@@ -23,8 +24,13 @@ class Ghost(pygame.sprite.Sprite):
         self.y_speed = 0 # how many pixels the sprite moves in the y-direction (per move)
 
     def choose_direction(self):
+        """Chooses a random direction for the Ghost() object to move in
+
+        :return: a String that represents which direction the Ghost() object is to move in
+        """
         a = random.randint(1, 4)
 
+        # Assigns a direction to each possible value of "a"
         if a == 1:
             return "UP"
         elif a == 2:
@@ -35,6 +41,10 @@ class Ghost(pygame.sprite.Sprite):
             return "RIGHT"
 
     def move(self, wall_list):
+        """Moves the Ghost() objects by randomizing their direction and changing it if they collide with a Wall() object
+
+        :param wall_list: a Group containing all of the Wall() sprites in the game
+        """
 
         # change x_speed and y_speed based on which direction the ghost is set to move in
         if self.direction == "LEFT":
