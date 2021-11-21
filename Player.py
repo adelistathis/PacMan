@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.SPEED = 2
         self.x_speed = 0
         self.y_speed = 0
-
+        self.score = 0
 
     def update(self, wList):
         hits = pygame.sprite.spritecollide(self, wList, False)
@@ -54,3 +54,14 @@ class Player(pygame.sprite.Sprite):
             self.y_speed = 0
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
+
+    def eat_block(self, block_list):
+
+        collision = pygame.sprite.spritecollide(self, block_list, False)
+
+        for collided in collision:
+            collided.kill()
+            self.score += 1
+
+
+

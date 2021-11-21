@@ -35,9 +35,13 @@ ghost_list.add(pinky)
 ghost_list.add(clyde)
 all_sprites_list.add(ghost_list)
 
-# Create the walls and the blocks
+# Create the walls
 wall_list = Pacman.setup_room()
+all_sprites_list.add(wall_list)
+
+# Create the blocks
 block_list = Pacman.create_blocks(wall_list, all_sprites_list)
+all_sprites_list.add(block_list)
 
 clock = pygame.time.Clock()
 count = 0
@@ -60,8 +64,12 @@ while running:
     blinky.move(wall_list)
     pinky.move(wall_list)
     clyde.move(wall_list)
-    # move pacman
+
+    # Move pacman
     pac.update(wall_list)
+
+    # Give PacMan the ability to eat blocks
+    pac.eat_block(block_list)
 
     screen.fill(BLACK)
 
@@ -69,7 +77,6 @@ while running:
     wall_list.draw(screen)
     block_list.draw(screen)
     all_sprites_list.draw(screen)
-
 
     pygame.display.flip()
     clock.tick(120)
