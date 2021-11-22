@@ -17,6 +17,7 @@ WHITE = pygame.Color(255, 255, 255)
 GREY = pygame.Color(128, 128, 128)
 RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
+YELLOW = (255, 255, 0)
 
 # instantiate the Player() and Ghost() objects
 pac = Player(fileName='pacman_o.png', xIn=30, yIn=30, lives=3)
@@ -64,8 +65,11 @@ running = True
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("PacMan")
 
-died = False
-iterations_after_death = 0
+font = pygame.font.SysFont('Comic Sans MS', 30)
+
+text = font.render("SCORE: ", False, YELLOW)
+textRect = text.get_rect()
+textRect.center = (580, 625)
 
 while running:
     count += 1
@@ -96,6 +100,8 @@ while running:
 
     # Draw the sprites
     all_sprites_list.draw(screen)
+    text = font.render("SCORE: {}".format(pac.score), False, YELLOW)
+    screen.blit(text, (475, 620))
 
     pygame.display.flip()
     clock.tick(100)

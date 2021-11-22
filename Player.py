@@ -99,12 +99,10 @@ class Player(pygame.sprite.Sprite):
             collided.kill()
             self.score += 1
 
-        """
-        CODE BELOW DOES NOT WORK!
-        """
-        # if self.score == len(block_list):
-        #     pygame.quit()
-        #     sys.exit()
+        # If the player's score equals the number of blocks on the board
+        if self.score == 210:
+            pygame.quit()
+            sys.exit()
 
     def die(self, ghost_list):
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
