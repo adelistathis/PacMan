@@ -7,7 +7,8 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, fileName, xIn, yIn, lives):
         pygame.sprite.Sprite.__init__(self)
         image = pygame.image.load(os.path.join('images', fileName))
-        self.image = pygame.transform.scale(image, (40, 40))
+        self.ogImage = pygame.transform.scale(image, (40, 40))
+        self.image = self.ogImage
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)
         self.WIDTH = 606 # width of game window
@@ -16,6 +17,9 @@ class Player(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.score = 0
+        self.leftImage = pygame.transform.flip(self.ogImage, True, False)
+        self.downImage = pygame.transform.rotate(self.ogImage, 270)
+        self.upImage = pygame.transform.rotate(self.ogImage, 90)
         self.lives = lives
 
     def update(self, wall_list):
@@ -42,19 +46,33 @@ class Player(pygame.sprite.Sprite):
             self.y_speed = self.SPEED
             self.x_speed = 0
 
+
         # prevents the Player() object from moving off screen
         if self.rect.right > self.WIDTH:
             self.rect.right = self.WIDTH
-            self.x_speed = 0
+            #self.x_speed = 0
         if self.rect.left < 0:
             self.rect.left = 0
-            self.x_speed = 0
+            #self.x_speed = 0
         if self.rect.top < 0:
             self.rect.top = 0
-            self.y_speed = 0
+            #self.y_speed = 0
         if self.rect.bottom > self.HEIGHT:
             self.rect.bottom = self.HEIGHT
-            self.y_speed = 0
+            #self.y_speed = 0
+
+        self.leftImage = pygame.transform.flip(self.image,True, False)
+        self.downImage = pygame.transform.rotate(self.image, 270)
+        self.upImage = pygame.transform.rotate(self.image, 90)
+
+        if self.x_speed < 0:
+            self.image = self.leftImage
+        if self.y_speed < 0:
+            self.image = self.downImage
+        if self.y_speed > 0 :
+            self.image = self.upImage
+        if self.x_speed > 0 :
+            self.image = self.ogImage
 
         # move the Player() object
         self.rect.x += self.x_speed
