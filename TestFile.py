@@ -71,7 +71,6 @@ while running:
     # Give PacMan the ability to eat blocks
     pac.eat_block(block_list)
 
-    # Check if PacMan collided with a ghost
     pac.die(ghost_list)
 
     # fill the screen
@@ -81,4 +80,4 @@ while running:
     all_sprites_list.draw(screen)
 
     pygame.display.flip()
-    clock.tick(120)
+    clock.tick(100)

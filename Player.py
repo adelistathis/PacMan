@@ -81,10 +81,12 @@ class Player(pygame.sprite.Sprite):
             collided.kill()
             self.score += 1
 
-        # if the player has eaten all of the blocks
-        if self.score == len(block_list):
-            pygame.quit()
-            sys.exit()
+        """
+        CODE BELOW DOES NOT WORK!
+        """
+        # if self.score == len(block_list):
+        #     pygame.quit()
+        #     sys.exit()
 
     def die(self, ghost_list):
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
@@ -95,14 +97,12 @@ class Player(pygame.sprite.Sprite):
         :param ghost_list: a Group containing all of the Ghost() sprites in the game
         """
 
+        # check for a collision between PacMan and the ghosts
         collision = pygame.sprite.spritecollide(self, ghost_list, False)
 
-        # if there was a collision with a Ghost sprite
-        if collision:
-
+        if len(collision) > 0:
             self.lives -= 1
 
-            # if the player has lost all of their lives
             if self.lives == 0:
                 pygame.quit()
                 sys.exit()
