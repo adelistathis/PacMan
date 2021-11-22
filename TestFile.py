@@ -45,9 +45,9 @@ block_list = Pacman.create_blocks(wall_list, all_sprites_list)
 all_sprites_list.add(block_list)
 
 # Instantiate the hearts and add them to the heart list
-heart_1 = Heart(fileName='heart.png', xIn=20, yIn=625)
-heart_2 = Heart(fileName='heart.png', xIn=60, yIn=625)
-heart_3 = Heart(fileName='heart.png', xIn=100, yIn=625)
+heart_1 = Heart(fileName='heart.jpeg', xIn=20, yIn=625)
+heart_2 = Heart(fileName='heart.jpeg', xIn=60, yIn=625)
+heart_3 = Heart(fileName='heart.jpeg', xIn=100, yIn=625)
 
 # Add the hearts to the heart list and list of all the sprites
 heart_list = pygame.sprite.RenderPlain()
@@ -88,7 +88,7 @@ while running:
     pac.eat_block(block_list)
 
     # check if pac died
-    if pac.die(ghost_list):
+    if pac.die(ghost_list): # will run the function in order to check the if-statement
         Pacman.remove_heart(heart_list)
 
     # fill the background
