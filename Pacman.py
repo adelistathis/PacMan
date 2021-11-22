@@ -5,6 +5,7 @@ from Ghost import Ghost
 from Wall import Wall
 from Block import Block
 from Player import Player
+from Heart import Heart
 
 pygame.init()
 
@@ -91,6 +92,10 @@ def create_blocks(wall_list, all_sprites_list):
                     all_sprites_list.add(block)
 
     return block_list
+
+
+def remove_heart(heart_list):
+    heart_list.sprites()[len(heart_list.sprites()) - 1].kill()
 
 
 
