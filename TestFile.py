@@ -5,6 +5,7 @@ from Ghost import Ghost
 from Wall import Wall
 from Block import Block
 from Player import Player
+from Heart import Heart
 import Pacman
 
 pygame.init()
@@ -43,11 +44,23 @@ all_sprites_list.add(wall_list)
 block_list = Pacman.create_blocks(wall_list, all_sprites_list)
 all_sprites_list.add(block_list)
 
+# Instantiate the hearts and add them to the heart list
+heart_1 = Heart(fileName='heart.png', xIn=20, yIn=625)
+heart_2 = Heart(fileName='heart.png', xIn=60, yIn=625)
+heart_3 = Heart(fileName='heart.png', xIn=100, yIn=625)
+
+# Add the hearts to the heart list and list of all the sprites
+heart_list = pygame.sprite.RenderPlain()
+heart_list.add(heart_1)
+heart_list.add(heart_2)
+heart_list.add(heart_3)
+all_sprites_list.add(heart_list)
+
 clock = pygame.time.Clock()
 count = 0
 running = True
 
-(width, height) = (606, 606)
+(width, height) = (606, 650)
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("PacMan")
 
@@ -75,7 +88,8 @@ while running:
     pac.eat_block(block_list)
 
     # check if pac died
-    pac.die(ghost_list)
+    if pac.die(ghost_list):
+        Pacman.remove_heart(heart_list)
 
     # fill the background
     screen.fill(BLACK)
