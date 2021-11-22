@@ -11,7 +11,7 @@ class Ghost(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         image = pygame.image.load(os.path.join('images', fileName))
-        self.image = pygame.transform.scale(image, (45, 45))
+        self.image = pygame.transform.scale(image, (40, 40))
 
         self.rect = self.image.get_rect()
         self.rect.left = x # position of left side of sprite's rectangle

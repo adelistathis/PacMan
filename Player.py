@@ -100,14 +100,16 @@ class Player(pygame.sprite.Sprite):
         # if there was a collision with a Ghost sprite
         if collision:
 
+            self.lives -= 1
+
             # if the player has lost all of their lives
             if self.lives == 0:
                 pygame.quit()
                 sys.exit()
 
             # Move the Player to their original position
-            self.rect.center = (30, 30)
-            self.lives -= 1
+            self.rect.x = 15
+            self.rect.y = 15
 
 
 

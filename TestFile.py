@@ -18,7 +18,7 @@ RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 
 # instantiate the Player() and Ghost() objects
-pac = Player('pacman_o.png', 30, 30, lives = 3)
+pac = Player('pacman_o.png', 30, 30, lives=5)
 inky = Ghost('inky.png', 285, 75)
 blinky = Ghost('blinky.png', 285, 75)
 pinky = Ghost('pinky.png', 285, 195)
@@ -74,6 +74,7 @@ while running:
     # Check if PacMan collided with a ghost
     pac.die(ghost_list)
 
+    # fill the screen
     screen.fill(BLACK)
 
     # Draw the sprites
