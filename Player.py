@@ -111,6 +111,10 @@ class Player(pygame.sprite.Sprite):
             self.rect.x = 15
             self.rect.y = 15
 
+            return True
+
+        return False
+
 
 
 
