@@ -19,25 +19,8 @@ RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 YELLOW = (255, 255, 0)
 
-# instantiate the Player() and Ghost() objects
-pac = Player(fileName='pacman_o.png', xIn=30, yIn=30, lives=3)
-inky = Ghost(fileName='inky.png', x=285, y=75)
-blinky = Ghost(fileName='blinky.png', x=285, y=75)
-pinky = Ghost(fileName='pinky.png', x=285, y=75)
-clyde = Ghost(fileName='clyde.png', x=285, y=195)
-drinky = Ghost(fileName='drinky.png', x=285, y=195)
-
+# list containing all of the sprites in the game
 all_sprites_list = pygame.sprite.RenderPlain()
-all_sprites_list.add(pac)
-
-# Add the ghosts to the ghost list and list of all the sprites
-ghost_list = pygame.sprite.RenderPlain()
-ghost_list.add(inky)
-ghost_list.add(blinky)
-ghost_list.add(pinky)
-ghost_list.add(clyde)
-ghost_list.add(drinky)
-all_sprites_list.add(ghost_list)
 
 # Create the walls
 wall_list = Pacman.setup_room()
@@ -46,6 +29,27 @@ all_sprites_list.add(wall_list)
 # Create the blocks
 block_list = Pacman.create_blocks(wall_list, all_sprites_list)
 all_sprites_list.add(block_list)
+
+# instantiate the Player() object and add it to the all_sprite list
+pac = Player(fileName='pacman_o.png', xIn=303, yIn=280, lives=3)
+all_sprites_list.add(pac)
+
+# instantiate the Ghost() objects
+inky = Ghost(fileName='inky.png', x=285, y=75)
+blinky = Ghost(fileName='blinky.png', x=285, y=75)
+pinky = Ghost(fileName='pinky.png', x=285, y=75)
+clyde = Ghost(fileName='clyde.png', x=285, y=195)
+# drinky = Ghost(fileName='drinky.png', x=285, y=195) <-- FIFTH ghost
+
+
+# Add the ghosts to the ghost list and list of all the sprites
+ghost_list = pygame.sprite.RenderPlain()
+ghost_list.add(inky)
+ghost_list.add(blinky)
+ghost_list.add(pinky)
+ghost_list.add(clyde)
+# ghost_list.add(drinky)
+all_sprites_list.add(ghost_list)
 
 # Instantiate the hearts and add them to the heart list
 heart_1 = Heart(fileName='heart.jpeg', xIn=20, yIn=625)
@@ -86,13 +90,13 @@ while running:
     blinky.move(wall_list)
     pinky.move(wall_list)
     clyde.move(wall_list)
-    drinky.move(wall_list)
+    # drinky.move(wall_list)
 
     # Move pacman
     pac.update(wall_list)
 
     # Give PacMan the ability to eat blocks
-    pac.eat_block(block_list)
+    pac.eat_block(block_list, wall_list, all_sprites_list)
 
     # check if pac died
     if pac.die(ghost_list): # will run the function in order to check the if-statement

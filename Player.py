@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, fileName, xIn, yIn, lives):
         pygame.sprite.Sprite.__init__(self)
         image = pygame.image.load(os.path.join('images', fileName))
-        self.ogImage = pygame.transform.scale(image, (37, 37))
+        self.ogImage = pygame.transform.scale(image, (35, 35))
         self.image = self.ogImage
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)
@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
             self.x_speed = 0
             self.y_speed = 0
 
-    def eat_block(self, block_list):
+    def eat_block(self, block_list, wall_list, all_sprites_list):
         """Gives the player the ability to eat Block() sprites
 
         :param block_list: a Group containing all of the Block() sprites in the game
@@ -99,10 +99,10 @@ class Player(pygame.sprite.Sprite):
             collided.kill()
             self.score += 1
 
-        # If the player's score equals the number of blocks on the board
-        if self.score == 210:
-            pygame.quit()
-            sys.exit()
+            # if all blocks on board are eaten by PacMan, we will respawn them
+            if self.score % 210 == 0:
+                all_sprites_list.add(block_list)
+
 
     def die(self, ghost_list):
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
@@ -124,8 +124,7 @@ class Player(pygame.sprite.Sprite):
                 sys.exit()
 
             # Move the Player to their original position
-            self.rect.x = 15
-            self.rect.y = 15
+            self.rect.center = (303, 280)
 
             return True
 
