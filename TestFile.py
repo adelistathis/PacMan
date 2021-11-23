@@ -31,7 +31,7 @@ block_list = Pacman.create_blocks(wall_list)
 all_sprites_list.add(block_list)
 
 # instantiate the Player() object and add it to the all_sprite list
-pac = Player(fileName='pacman_o.png', xIn=303, yIn=280, lives=3)
+pac = Player(fileName='pacman_o.png', xIn=303, yIn=275, lives=3)
 all_sprites_list.add(pac)
 
 # instantiate the Ghost() objects
@@ -96,16 +96,11 @@ while running:
     pac.update(wall_list)
 
     # Give PacMan the ability to eat blocks
-    pac.eat_block(block_list)
+    pac.eat_block(block_list, wall_list, all_sprites_list)
 
     # check if pac died
     if pac.die(ghost_list): # will run the function in order to check the if-statement
         Pacman.remove_heart(heart_list)
-
-    if pac.score != 0 and pac.score % 210 == 0:
-        block_list = Pacman.create_blocks(wall_list) # add the blocks to the block_list again
-        all_sprites_list.add(block_list)
-        pac.score += 10 # give them 10 bonus points for eating all of the blocks on the grid
 
     # fill the background
     screen.fill(BLACK)

@@ -1,6 +1,35 @@
 import sys
 import pygame
 import os
+from Block import Block
+
+
+ORANGE = pygame.Color(255, 165, 0)
+
+
+def create_blocks(wall_list):
+    block_list = pygame.sprite.RenderPlain()
+
+    # Draw the grid
+    for row in range(19):
+        for column in range(19):
+            if (row == 7 or row == 8) and (column == 8 or column == 9 or column == 10):
+                continue
+            else:
+                block = Block(ORANGE, 4, 4)
+
+                # Set a random location for the block
+                block.rect.x = (30 * column + 6) + 26
+                block.rect.y = (30 * row + 6) + 26
+
+                b_collide = pygame.sprite.spritecollide(block, wall_list, False)
+                if b_collide:
+                    continue
+                else:
+                    # Add the block to the list of objects
+                    block_list.add(block)
+
+    return block_list
 
 
 class Player(pygame.sprite.Sprite):
@@ -50,16 +79,16 @@ class Player(pygame.sprite.Sprite):
         # prevents the Player() object from moving off screen
         if self.rect.right > self.WIDTH:
             self.rect.right = self.WIDTH
-            #self.x_speed = 0
+            # self.x_speed = 0
         if self.rect.left < 0:
             self.rect.left = 0
-            #self.x_speed = 0
+            # self.x_speed = 0
         if self.rect.top < 0:
             self.rect.top = 0
-            #self.y_speed = 0
+            # self.y_speed = 0
         if self.rect.bottom > self.HEIGHT:
             self.rect.bottom = self.HEIGHT
-            #self.y_speed = 0
+            # self.y_speed = 0
 
         self.leftImage = pygame.transform.flip(self.image,True, False)
         self.downImage = pygame.transform.rotate(self.image, 270)
@@ -86,7 +115,7 @@ class Player(pygame.sprite.Sprite):
             self.x_speed = 0
             self.y_speed = 0
 
-    def eat_block(self, block_list):
+    def eat_block(self, block_list, wall_list, all_sprites_list):
         """Gives the player the ability to eat Block() sprites
 
         :param block_list: a Group containing all of the Block() sprites in the game
@@ -99,6 +128,10 @@ class Player(pygame.sprite.Sprite):
             collided.kill()
             self.score += 1
 
+        # if self.score != 0 and self.score % 210 == 0:
+        #     block_list = create_blocks(wall_list) # add the blocks to the block_list again
+        #     all_sprites_list.add(block_list)
+        #     self.score += 10
 
     def die(self, ghost_list):
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
