@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, fileName, xIn, yIn, lives):
         pygame.sprite.Sprite.__init__(self)
         image = pygame.image.load(os.path.join('images', fileName))
-        self.ogImage = pygame.transform.scale(image, (40, 40))
+        self.ogImage = pygame.transform.scale(image, (37, 37))
         self.image = self.ogImage
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)

@@ -23,8 +23,9 @@ YELLOW = (255, 255, 0)
 pac = Player(fileName='pacman_o.png', xIn=30, yIn=30, lives=3)
 inky = Ghost(fileName='inky.png', x=285, y=75)
 blinky = Ghost(fileName='blinky.png', x=285, y=75)
-pinky = Ghost(fileName='pinky.png', x=285, y=195)
+pinky = Ghost(fileName='pinky.png', x=285, y=75)
 clyde = Ghost(fileName='clyde.png', x=285, y=195)
+drinky = Ghost(fileName='drinky.png', x=285, y=195)
 
 all_sprites_list = pygame.sprite.RenderPlain()
 all_sprites_list.add(pac)
@@ -35,6 +36,7 @@ ghost_list.add(inky)
 ghost_list.add(blinky)
 ghost_list.add(pinky)
 ghost_list.add(clyde)
+ghost_list.add(drinky)
 all_sprites_list.add(ghost_list)
 
 # Create the walls
@@ -84,6 +86,7 @@ while running:
     blinky.move(wall_list)
     pinky.move(wall_list)
     clyde.move(wall_list)
+    drinky.move(wall_list)
 
     # Move pacman
     pac.update(wall_list)
