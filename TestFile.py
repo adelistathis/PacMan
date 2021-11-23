@@ -37,8 +37,8 @@ all_sprites_list.add(pac)
 # instantiate the Ghost() objects
 inky = Ghost(fileName='inky.png', x=285, y=75)
 blinky = Ghost(fileName='blinky.png', x=285, y=75)
-pinky = Ghost(fileName='pinky.png', x=285, y=75)
-clyde = Ghost(fileName='clyde.png', x=285, y=195)
+pinky = Ghost(fileName='pinky.png', x=285, y=380)
+clyde = Ghost(fileName='clyde.png', x=285, y=380)
 # drinky = Ghost(fileName='drinky.png', x=285, y=195) <-- FIFTH ghost
 
 

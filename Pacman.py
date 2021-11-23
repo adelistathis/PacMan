@@ -12,10 +12,6 @@ pygame.init()
 BLUE = (0, 0, 255)
 ORANGE = pygame.Color(255, 165, 0)
 
-# Walls taken out from original setup
-wall_a = [240, 240, 42, 6]
-wall_b = [324, 240, 42, 6]
-
 
 # This creates all the walls in the game room
 def setup_room():
@@ -45,6 +41,8 @@ def setup_room():
              [420, 240, 6, 126],
              [240, 240, 6, 66],
              [240, 300, 126, 6],
+             [240, 240, 35, 6],
+             [331, 240, 35, 6],
              [360, 240, 6, 66],
              [0, 300, 66, 6],
              [540, 300, 66, 6],
