@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
             self.x_speed = 0
             self.y_speed = 0
 
-    def eat_block(self, block_list, wall_list, all_sprites_list):
+    def eat_block(self, block_list):
         """Gives the player the ability to eat Block() sprites
 
         :param block_list: a Group containing all of the Block() sprites in the game
@@ -98,10 +98,6 @@ class Player(pygame.sprite.Sprite):
         for collided in collision:
             collided.kill()
             self.score += 1
-
-            # if all blocks on board are eaten by PacMan, we will respawn them
-            if self.score % 210 == 0:
-                all_sprites_list.add(block_list)
 
 
     def die(self, ghost_list):

@@ -12,6 +12,10 @@ pygame.init()
 BLUE = (0, 0, 255)
 ORANGE = pygame.Color(255, 165, 0)
 
+# Walls taken out from original setup
+wall_a = [240, 240, 42, 6]
+wall_b = [324, 240, 42, 6]
+
 
 # This creates all the walls in the game room
 def setup_room():
@@ -39,8 +43,6 @@ def setup_room():
              [180, 240, 6, 126],
              [180, 360, 246, 6],
              [420, 240, 6, 126],
-             [240, 240, 42, 6],
-             [324, 240, 42, 6],
              [240, 240, 6, 66],
              [240, 300, 126, 6],
              [360, 240, 6, 66],
@@ -68,7 +70,7 @@ def setup_room():
     return wall_list
 
 
-def create_blocks(wall_list, all_sprites_list):
+def create_blocks(wall_list):
     block_list = pygame.sprite.RenderPlain()
 
     # Draw the grid
@@ -89,7 +91,6 @@ def create_blocks(wall_list, all_sprites_list):
                 else:
                     # Add the block to the list of objects
                     block_list.add(block)
-                    all_sprites_list.add(block)
 
     return block_list
 

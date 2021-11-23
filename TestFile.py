@@ -27,7 +27,7 @@ wall_list = Pacman.setup_room()
 all_sprites_list.add(wall_list)
 
 # Create the blocks
-block_list = Pacman.create_blocks(wall_list, all_sprites_list)
+block_list = Pacman.create_blocks(wall_list)
 all_sprites_list.add(block_list)
 
 # instantiate the Player() object and add it to the all_sprite list
@@ -96,11 +96,16 @@ while running:
     pac.update(wall_list)
 
     # Give PacMan the ability to eat blocks
-    pac.eat_block(block_list, wall_list, all_sprites_list)
+    pac.eat_block(block_list)
 
     # check if pac died
     if pac.die(ghost_list): # will run the function in order to check the if-statement
         Pacman.remove_heart(heart_list)
+
+    if pac.score != 0 and pac.score % 210 == 0:
+        block_list = Pacman.create_blocks(wall_list) # add the blocks to the block_list again
+        all_sprites_list.add(block_list)
+        pac.score += 10 # give them 10 bonus points for eating all of the blocks on the grid
 
     # fill the background
     screen.fill(BLACK)
@@ -108,7 +113,7 @@ while running:
     # Draw the sprites
     all_sprites_list.draw(screen)
     text = font.render("SCORE: {}".format(pac.score), False, YELLOW)
-    screen.blit(text, (475, 620))
+    screen.blit(text, (460, 620))
 
     pygame.display.flip()
-    clock.tick(100)
+    clock.tick(60)
