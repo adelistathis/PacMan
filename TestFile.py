@@ -31,7 +31,7 @@ block_list = Pacman.create_blocks(wall_list)
 all_sprites_list.add(block_list)
 
 # instantiate the Player() object and add it to the all_sprite list
-pac = Player(fileName='pacman_o.png', xIn=303, yIn=275, lives=3)
+pac = Player(fileName='pacman_right.png', xIn=303, yIn=275, lives=3)
 all_sprites_list.add(pac)
 
 # instantiate the Ghost() objects
@@ -95,7 +95,7 @@ while running:
     pac.update(wall_list)
 
     # Give PacMan the ability to eat blocks
-    pac.eat_block(block_list, wall_list, all_sprites_list)
+    pac.eat_block(block_list)
 
     # checks if all of the blocks in the maze have been eaten
     if len(block_list) == 0:
