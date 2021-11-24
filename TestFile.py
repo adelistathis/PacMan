@@ -78,7 +78,6 @@ textRect = text.get_rect()
 textRect.center = (580, 625)
 
 while running:
-    count += 1
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -97,6 +96,21 @@ while running:
 
     # Give PacMan the ability to eat blocks
     pac.eat_block(block_list, wall_list, all_sprites_list)
+
+    # checks if all of the blocks in the maze have been eaten
+    if len(block_list) == 0:
+        block_list = Pacman.create_blocks(wall_list) # 'respawns' the blocks
+
+        # remove the ghosts so that they aren't behind the blocks when the blocks are redrawn on the screen
+        all_sprites_list.remove(inky)
+        all_sprites_list.remove(blinky)
+        all_sprites_list.remove(pinky)
+        all_sprites_list.remove(clyde)
+
+        # add the block list to the list of all the sprites in the game
+        all_sprites_list.add(block_list)
+        # add the ghost list back
+        all_sprites_list.add(ghost_list)
 
     # check if pac died
     if pac.die(ghost_list): # will run the function in order to check the if-statement
