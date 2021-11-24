@@ -17,7 +17,7 @@ class Ghost(pygame.sprite.Sprite):
         self.rect.left = x # position of left side of sprite's rectangle
         self.rect.top = y # position of top of sprite's rectangle
         self.direction = "UP"
-        self.SPEED = 2 # used to change the values of "x_speed" and "y_speed"
+        self.SPEED = 3 # used to change the values of "x_speed" and "y_speed"
         self.WIDTH = 606 # width of window
         self.HEIGHT = 606 # height of window
         self.x_speed = 0 # how many pixels the sprite moves in the x-direction (per move)

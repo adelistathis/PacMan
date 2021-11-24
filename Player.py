@@ -61,16 +61,16 @@ class Player(pygame.sprite.Sprite):
         # prevents the Player() object from moving off screen
         if self.rect.right > self.WIDTH:
             self.rect.right = self.WIDTH
-            self.x_speed = 0
+            # self.x_speed = 0
         if self.rect.left < 0:
             self.rect.left = 0
-            self.x_speed = 0
+            # self.x_speed = 0
         if self.rect.top < 0:
             self.rect.top = 0
-            self.y_speed = 0
+            # self.y_speed = 0
         if self.rect.bottom > self.HEIGHT:
             self.rect.bottom = self.HEIGHT
-            self.y_speed = 0
+            # self.y_speed = 0
 
         # self.leftImage = pygame.transform.flip(self.image, True, False)
         # self.downImage = pygame.transform.rotate(self.image, 270)
