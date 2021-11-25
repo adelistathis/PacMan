@@ -40,17 +40,22 @@ class Ghost(pygame.sprite.Sprite):
         elif a == 4:
             return "RIGHT"
 
-    def move(self, wall_list):
+    def move(self, wall_list, name):
         """Moves the Ghost() objects by randomizing their direction and changing it if they collide with a Wall() object
 
         :param wall_list: a Group containing all of the Wall() sprites in the game
+        :param name: the variable name of the Ghost sprite
         """
 
         # change x_speed and y_speed based on which direction the ghost is set to move in
         if self.direction == "LEFT":
+            image = pygame.image.load(os.path.join('images', '{}_left.png'.format(name)))
+            self.image = pygame.transform.scale(image, (40, 40))
             self.x_speed = -self.SPEED
             self.y_speed = 0
         elif self.direction == "RIGHT":
+            image = pygame.image.load(os.path.join('images', '{}_right.png'.format(name)))
+            self.image = pygame.transform.scale(image, (40, 40))
             self.x_speed = self.SPEED
             self.y_speed = 0
         elif self.direction == "UP":

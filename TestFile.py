@@ -35,11 +35,11 @@ pac = Player(fileName='pacman_right.png', xIn=303, yIn=275, lives=3)
 all_sprites_list.add(pac)
 
 # instantiate the Ghost() objects
-inky = Ghost(fileName='inky.png', x=285, y=75)
-blinky = Ghost(fileName='blinky.png', x=285, y=75)
-pinky = Ghost(fileName='pinky.png', x=285, y=380)
-clyde = Ghost(fileName='clyde.png', x=285, y=380)
-# drinky = Ghost(fileName='drinky.png', x=285, y=195) <-- FIFTH ghost
+inky = Ghost(fileName='inky_right.png', x=285, y=75)
+blinky = Ghost(fileName='blinky_right.png', x=285, y=75)
+pinky = Ghost(fileName='pinky_right.png', x=285, y=380)
+clyde = Ghost(fileName='clyde_right.png', x=285, y=380)
+# drinky = Ghost(fileName='drinky_right.png', x=285, y=195) <-- FIFTH ghost
 
 
 # Add the ghosts to the ghost list and list of all the sprites
@@ -89,10 +89,10 @@ while running:
             sys.exit()
 
     # Move the ghosts
-    inky.move(wall_list)
-    blinky.move(wall_list)
-    pinky.move(wall_list)
-    clyde.move(wall_list)
+    inky.move(wall_list, name='inky')
+    blinky.move(wall_list, name='blinky')
+    pinky.move(wall_list, name='pinky')
+    clyde.move(wall_list, name='clyde')
     # drinky.move(wall_list)
 
     # Move pacman
