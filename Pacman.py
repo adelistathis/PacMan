@@ -5,7 +5,7 @@ from Ghost import Ghost
 from Wall import Wall
 from Block import Block
 from Player import Player
-from Heart import Heart
+from Life import Life
 
 pygame.init()
 
@@ -93,8 +93,8 @@ def create_blocks(wall_list):
     return block_list
 
 
-def remove_heart(heart_list):
-    heart_list.sprites()[len(heart_list.sprites()) - 1].kill()
+def remove_life(life_list):
+    life_list.sprites()[len(life_list.sprites()) - 1].kill()
 
 
 

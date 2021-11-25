@@ -5,7 +5,7 @@ from Ghost import Ghost
 from Wall import Wall
 from Block import Block
 from Player import Player
-from Heart import Heart
+from Life import Life
 import Pacman
 
 pygame.init()
@@ -52,16 +52,16 @@ ghost_list.add(clyde)
 all_sprites_list.add(ghost_list)
 
 # Instantiate the hearts and add them to the heart list
-heart_1 = Heart(fileName='heart.jpeg', xIn=20, yIn=625)
-heart_2 = Heart(fileName='heart.jpeg', xIn=60, yIn=625)
-heart_3 = Heart(fileName='heart.jpeg', xIn=100, yIn=625)
+life_1 = Life(fileName='life.jpeg', xIn=20, yIn=625)
+life_2 = Life(fileName='life.jpeg', xIn=60, yIn=625)
+life_3 = Life(fileName='life.jpeg', xIn=100, yIn=625)
 
 # Add the hearts to the heart list and list of all the sprites
-heart_list = pygame.sprite.RenderPlain()
-heart_list.add(heart_1)
-heart_list.add(heart_2)
-heart_list.add(heart_3)
-all_sprites_list.add(heart_list)
+life_list = pygame.sprite.RenderPlain()
+life_list.add(life_1)
+life_list.add(life_2)
+life_list.add(life_3)
+all_sprites_list.add(life_list)
 
 clock = pygame.time.Clock()
 count = 0
@@ -76,6 +76,10 @@ font = pygame.font.SysFont('Comic Sans MS', 30)
 text = font.render("SCORE: ", False, YELLOW)
 textRect = text.get_rect()
 textRect.center = (580, 625)
+
+s = 'sounds'
+intro = pygame.mixer.Sound(os.path.join(s, 'intro.wav'))
+pygame.mixer.Sound.play(intro)
 
 while running:
 
@@ -112,9 +116,12 @@ while running:
         # add the ghost list back
         all_sprites_list.add(ghost_list)
 
+        # play the intro music again
+        pygame.mixer.Sound.play(intro)
+
     # check if pac died
     if pac.die(ghost_list): # will run the function in order to check the if-statement
-        Pacman.remove_heart(heart_list)
+        Pacman.remove_life(life_list)
 
     # fill the background
     screen.fill(BLACK)

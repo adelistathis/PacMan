@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (xIn, yIn)
         self.WIDTH = 606 # width of game window
         self.HEIGHT = 606 # height of game window
-        self.SPEED = 2 # number of pixels PacMan moves in each move
+        self.SPEED = 3 # number of pixels PacMan moves in each move
         self.x_speed = 0
         self.y_speed = 0
         self.score = 0
@@ -105,8 +105,13 @@ class Player(pygame.sprite.Sprite):
 
         collision = pygame.sprite.spritecollide(self, block_list, False)
 
+        s = 'sounds'
+        chomp = pygame.mixer.Sound(os.path.join(s, 'chomp.wav'))
+
         # traverses the list of blocks that the Player() collided with
         for collided in collision:
+            pygame.mixer.Sound.play(chomp)
+
             collided.kill()
             self.score += 1
 
@@ -122,7 +127,12 @@ class Player(pygame.sprite.Sprite):
         # check for a collision between PacMan and the ghosts
         collision = pygame.sprite.spritecollide(self, ghost_list, False)
 
+        # load the death sound
+        s = 'sounds'
+        death = pygame.mixer.Sound(os.path.join(s, 'death.wav'))
+
         if len(collision) > 0:
+            pygame.mixer.Sound.play(death)
             self.lives -= 1
             self.x_speed = 0
             self.y_speed = 0
