@@ -71,11 +71,12 @@ running = True
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("PacMan")
 
-font = pygame.font.SysFont('Comic Sans MS', 30)
+font = pygame.font.SysFont('Comic Sans MS', 30) # Text font
 
 text = font.render("SCORE: ", False, YELLOW)
 textRect = text.get_rect()
 textRect.center = (580, 625)
+
 
 s = 'sounds'
 intro = pygame.mixer.Sound(os.path.join(s, 'intro.wav'))
