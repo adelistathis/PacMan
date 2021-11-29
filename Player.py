@@ -120,6 +120,7 @@ class Player(pygame.sprite.Sprite):
         return frames
 
     def die(self, ghost_list):
+        gameOver=False
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
         on the screen
 
