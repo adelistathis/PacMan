@@ -37,16 +37,16 @@ class Player(pygame.sprite.Sprite):
         keystate = pygame.key.get_pressed()
 
         # changes x and y speeds depending on which key was pressed by the Player
-        if keystate[pygame.K_LEFT]:
+        if keystate[pygame.K_LEFT] and self.x_speed <= 0:
             self.x_speed = -self.SPEED
             self.y_speed = 0
-        elif keystate[pygame.K_RIGHT]:
+        elif keystate[pygame.K_RIGHT] and self.x_speed >= 0:
             self.x_speed = self.SPEED
             self.y_speed = 0
-        elif keystate[pygame.K_UP]:
+        elif keystate[pygame.K_UP] and self.y_speed <= 0:
             self.y_speed = -self.SPEED
             self.x_speed = 0
-        elif keystate[pygame.K_DOWN]:
+        elif keystate[pygame.K_DOWN] and self.y_speed >= 0:
             self.y_speed = self.SPEED
             self.x_speed = 0
 
@@ -92,7 +92,7 @@ class Player(pygame.sprite.Sprite):
 
 
 
-    def eat_block(self, block_list):
+    def eat_block(self, frames , block_list):
         """Gives the player the ability to eat Block() sprites
 
         :param block_list: a Group containing all of the Block() sprites in the game
@@ -105,7 +105,9 @@ class Player(pygame.sprite.Sprite):
 
         # traverses the list of blocks that the Player() collided with
         for collided in collision:
-            pygame.mixer.Sound.play(chomp)
+            if(frames > 30):
+                pygame.mixer.Sound.play(chomp)
+                frames = 0
 
             collided.kill()
             self.score += 1
@@ -114,6 +116,7 @@ class Player(pygame.sprite.Sprite):
         if self.score == 210:
             pygame.quit()
             sys.exit()
+        return frames
 
     def die(self, ghost_list):
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them

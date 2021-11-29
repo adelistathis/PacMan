@@ -18,7 +18,7 @@ GREY = pygame.Color(128, 128, 128)
 RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 YELLOW = (255, 255, 0)
-
+framesSinceSound = 0
 # instantiate the Player() and Ghost() objects
 #pac = Player(xIn=30, yIn=30, lives=3)
 #inky = Ghost(fileName='inky.png', x=285, y=75)
@@ -87,6 +87,7 @@ textRect.center = (580, 625)
 
 s = 'sounds'
 intro = pygame.mixer.Sound(os.path.join(s, 'intro.wav'))
+pygame.mixer.set_num_channels(2)
 pygame.mixer.Sound.play(intro)
 
 while running:
@@ -107,7 +108,7 @@ while running:
     pac.update(wall_list)
 
     # Give PacMan the ability to eat blocks
-    pac.eat_block(block_list)
+    framesSinceSound = pac.eat_block(framesSinceSound, block_list)
 
     # checks if all of the blocks in the maze have been eaten
     if len(block_list) == 0:
@@ -140,4 +141,7 @@ while running:
     screen.blit(text, (460, 620))
 
     pygame.display.flip()
+
+    framesSinceSound += 1
+
     clock.tick(60)
