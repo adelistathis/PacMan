@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, fileName, xIn, yIn, lives):
         pygame.sprite.Sprite.__init__(self)
         image = pygame.image.load(os.path.join('images', fileName))
-        self.ogImage = pygame.transform.scale(image, (40, 40))
+        self.ogImage = pygame.transform.scale(image, (37, 37))
         self.image = self.ogImage.copy()
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)
@@ -18,8 +18,8 @@ class Player(pygame.sprite.Sprite):
         self.y_speed = 0
         self.score = 0
         self.leftImage = pygame.transform.flip(self.ogImage.copy(), True, False)
-        self.downImage = pygame.transform.rotate(self.ogImage.copy(), 270)
-        self.upImage = pygame.transform.rotate(self.ogImage.copy(), 90)
+        self.downImage = pygame.transform.rotate(self.ogImage.copy(), 90)
+        self.upImage = pygame.transform.rotate(self.ogImage.copy(), 270)
         self.direction = 0
         self.lives = lives
 
@@ -72,9 +72,6 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = self.HEIGHT
             self.y_speed = 0
 
-        self.leftImage = pygame.transform.flip(self.image,True, False)
-        self.downImage = pygame.transform.rotate(self.image, 270)
-        self.upImage = pygame.transform.rotate(self.image, 90)
 
 
 
