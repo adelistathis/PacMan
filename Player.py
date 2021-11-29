@@ -37,19 +37,18 @@ class Player(pygame.sprite.Sprite):
         keystate = pygame.key.get_pressed()
 
         # changes x and y speeds depending on which key was pressed by the Player
-        if keystate[pygame.K_LEFT] and self.x_speed <= 0:
+        if (keystate[pygame.K_a] or keystate[pygame.K_LEFT]) and self.x_speed <= 0:
             self.x_speed = -self.SPEED
             self.y_speed = 0
-        elif keystate[pygame.K_RIGHT] and self.x_speed >= 0:
+        elif (keystate[pygame.K_d] or keystate[pygame.K_RIGHT]) and self.x_speed >= 0:
             self.x_speed = self.SPEED
             self.y_speed = 0
-        elif keystate[pygame.K_UP] and self.y_speed <= 0:
+        elif (keystate[pygame.K_w] or keystate[pygame.K_UP]) and self.y_speed <= 0:
             self.y_speed = -self.SPEED
             self.x_speed = 0
-        elif keystate[pygame.K_DOWN] and self.y_speed >= 0:
+        elif (keystate[pygame.K_s] or keystate[pygame.K_DOWN]) and self.y_speed >= 0:
             self.y_speed = self.SPEED
             self.x_speed = 0
-
 
         # prevents the Player() object from moving off screen
         if self.rect.right > self.WIDTH:
@@ -65,8 +64,6 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = self.HEIGHT
             self.y_speed = 0
 
-
-
         # move the Player() object
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
@@ -80,8 +77,7 @@ class Player(pygame.sprite.Sprite):
             self.x_speed = 0
             self.y_speed = 0
 
-
-        #makes pacman face the right way
+        # makes pacman face the right way
         if self.x_speed < 0:
             self.image = self.leftImage.copy()
         if self.y_speed < 0:
@@ -90,8 +86,6 @@ class Player(pygame.sprite.Sprite):
             self.image = self.downImage.copy()
         if self.x_speed > 0 :
             self.image = self.rightImage.copy()
-
-
 
     def eat_block(self, frames , block_list):
         """Gives the player the ability to eat Block() sprites
@@ -115,8 +109,7 @@ class Player(pygame.sprite.Sprite):
 
         # If the player's score equals the number of blocks on the board
         if self.score == 210:
-            pygame.quit()
-            sys.exit()
+            pass
         return frames
 
     def die(self, ghost_list):
