@@ -20,12 +20,12 @@ ORANGE = pygame.Color(255, 165, 0)
 YELLOW = (255, 255, 0)
 
 # instantiate the Player() and Ghost() objects
-pac = Player(fileName='pacman_o.png', xIn=30, yIn=30, lives=3)
-inky = Ghost(fileName='inky.png', x=285, y=75)
-blinky = Ghost(fileName='blinky.png', x=285, y=75)
-pinky = Ghost(fileName='pinky.png', x=285, y=75)
-clyde = Ghost(fileName='clyde.png', x=285, y=195)
-drinky = Ghost(fileName='drinky.png', x=285, y=195)
+#pac = Player(xIn=30, yIn=30, lives=3)
+#inky = Ghost(fileName='inky.png', x=285, y=75)
+#blinky = Ghost(fileName='blinky.png', x=285, y=75)
+#pinky = Ghost(fileName='pinky.png', x=285, y=75)
+#clyde = Ghost(fileName='clyde.png', x=285, y=195)
+#drinky = Ghost(fileName='drinky.png', x=285, y=195)
 
 all_sprites_list = pygame.sprite.RenderPlain()
 
@@ -38,7 +38,7 @@ block_list = Pacman.create_blocks(wall_list)
 all_sprites_list.add(block_list)
 
 # instantiate the Player() object and add it to the all_sprite list
-pac = Player(fileName='pacman_right.png', xIn=303, yIn=275, lives=3)
+pac = Player( xIn=303, yIn=275, lives=3)
 all_sprites_list.add(pac)
 
 # instantiate the Ghost() objects

@@ -4,11 +4,10 @@ import os
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, fileName, xIn, yIn, lives):
+    def __init__(self, xIn, yIn, lives):
         pygame.sprite.Sprite.__init__(self)
-        image = pygame.image.load(os.path.join('images', fileName))
-        self.ogImage = pygame.transform.scale(image, (37, 37))
-        self.image = self.ogImage.copy()
+        image = pygame.image.load(os.path.join('images', "pacman_right.png"))
+        self.image = pygame.transform.scale(image, (37, 37))
         self.rect = self.image.get_rect()
         self.rect.center = (xIn, yIn)
         self.WIDTH = 606 # width of game window
@@ -17,9 +16,14 @@ class Player(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.score = 0
-        self.leftImage = pygame.transform.flip(self.ogImage.copy(), True, False)
-        self.downImage = pygame.transform.rotate(self.ogImage.copy(), 90)
-        self.upImage = pygame.transform.rotate(self.ogImage.copy(), 270)
+        self.rightImage = pygame.image.load(os.path.join('images', "pacman_right.png"))
+        self.rightImage = pygame.transform.scale(self.rightImage, (37, 37))
+        self.leftImage = pygame.image.load(os.path.join('images', "pacman_left.png"))
+        self.leftImage = pygame.transform.scale(self.leftImage, (37, 37))
+        self.downImage = pygame.image.load(os.path.join('images', "pacman_down.png"))
+        self.downImage = pygame.transform.scale(self.downImage, (37, 37))
+        self.upImage = pygame.image.load(os.path.join('images', "pacman_up.png"))
+        self.upImage = pygame.transform.scale(self.upImage, (37, 37))
         self.lives = lives
 
     def update(self, wall_list):
@@ -76,15 +80,15 @@ class Player(pygame.sprite.Sprite):
             self.y_speed = 0
 
 
-
+        #makes pacman face the right way
         if self.x_speed < 0:
             self.image = self.leftImage.copy()
         if self.y_speed < 0:
-            self.image = self.downImage.copy()
-        if self.y_speed > 0 :
             self.image = self.upImage.copy()
+        if self.y_speed > 0 :
+            self.image = self.downImage.copy()
         if self.x_speed > 0 :
-            self.image = self.ogImage.copy()
+            self.image = self.rightImage.copy()
 
 
 
