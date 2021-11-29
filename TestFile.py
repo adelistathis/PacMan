@@ -129,9 +129,9 @@ while running:
         pygame.mixer.Sound.play(intro)
 
     # check if pac died
-    if pac.die(ghost_list): # will run the function in order to check the if-statement
+    if pac.die(ghost_list[0]): # will run the function in order to check the if-statement
         Pacman.remove_life(life_list)
-
+    if pac.die(ghost_list[0]):
     # fill the background
     screen.fill(BLACK)
 

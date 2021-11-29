@@ -71,6 +71,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
 
+        #handles wall collisions
         hits = pygame.sprite.spritecollide(self, wall_list, False)
         # if there was a collision between the Player() object and a Wall() object
         if hits:
@@ -141,16 +142,15 @@ class Player(pygame.sprite.Sprite):
             self.y_speed = 0
 
             if self.lives == 0:
-                pygame.quit()
-                sys.exit()
+                gameOver = True
 
             # Move the Player to their original position
-            self.rect.x = 15
-            self.rect.y = 15
+            self.rect.centerx = 303
+            self.rect.centery = 275
 
-            return True
+            return (True,gameOver)
 
-        return False
+        return (False,gameOver)
 
 
 
