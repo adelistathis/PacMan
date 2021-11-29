@@ -5,7 +5,7 @@ from Ghost import Ghost
 from Wall import Wall
 from Block import Block
 from Player import Player
-from Heart import Heart
+from Life import Life
 
 pygame.init()
 
@@ -39,10 +39,10 @@ def setup_room():
              [180, 240, 6, 126],
              [180, 360, 246, 6],
              [420, 240, 6, 126],
-             [240, 240, 42, 6],
-             [324, 240, 42, 6],
              [240, 240, 6, 66],
              [240, 300, 126, 6],
+             [240, 240, 35, 6],
+             [331, 240, 35, 6],
              [360, 240, 6, 66],
              [0, 300, 66, 6],
              [540, 300, 66, 6],
@@ -68,7 +68,7 @@ def setup_room():
     return wall_list
 
 
-def create_blocks(wall_list, all_sprites_list):
+def create_blocks(wall_list):
     block_list = pygame.sprite.RenderPlain()
 
     # Draw the grid
@@ -89,13 +89,12 @@ def create_blocks(wall_list, all_sprites_list):
                 else:
                     # Add the block to the list of objects
                     block_list.add(block)
-                    all_sprites_list.add(block)
 
     return block_list
 
 
-def remove_heart(heart_list):
-    heart_list.sprites()[len(heart_list.sprites()) - 1].kill()
+def remove_life(life_list):
+    life_list.sprites()[len(life_list.sprites()) - 1].kill()
 
 
 

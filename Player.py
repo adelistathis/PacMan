@@ -13,14 +13,13 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (xIn, yIn)
         self.WIDTH = 606 # width of game window
         self.HEIGHT = 606 # height of game window
-        self.SPEED = 2 # number of pixels PacMan moves in each move
+        self.SPEED = 3 # number of pixels PacMan moves in each move
         self.x_speed = 0
         self.y_speed = 0
         self.score = 0
         self.leftImage = pygame.transform.flip(self.ogImage.copy(), True, False)
         self.downImage = pygame.transform.rotate(self.ogImage.copy(), 90)
         self.upImage = pygame.transform.rotate(self.ogImage.copy(), 270)
-        self.direction = 0
         self.lives = lives
 
     def update(self, wall_list):
@@ -31,29 +30,19 @@ class Player(pygame.sprite.Sprite):
         :param wall_list: a Group containing all of the Wall() sprites in the game
         """
 
-        if self.x_speed < 0:
-            self.direction = 2
-        if self.y_speed < 0:
-            self.direction = 3
-        if self.y_speed > 0 :
-            self.direction = 1
-        if self.x_speed > 0 :
-            self.direction = 0
-        if self.x_speed == 0 and self.y_speed == 0:
-            self.direction = 5
         keystate = pygame.key.get_pressed()
 
         # changes x and y speeds depending on which key was pressed by the Player
-        if keystate[pygame.K_LEFT] and self.direction != 0:
+        if keystate[pygame.K_LEFT]:
             self.x_speed = -self.SPEED
             self.y_speed = 0
-        elif keystate[pygame.K_RIGHT] and self.direction != 2:
+        elif keystate[pygame.K_RIGHT]:
             self.x_speed = self.SPEED
             self.y_speed = 0
-        elif keystate[pygame.K_UP] and self.direction != 1:
+        elif keystate[pygame.K_UP]:
             self.y_speed = -self.SPEED
             self.x_speed = 0
-        elif keystate[pygame.K_DOWN] and self.direction != 3:
+        elif keystate[pygame.K_DOWN]:
             self.y_speed = self.SPEED
             self.x_speed = 0
 
@@ -71,7 +60,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > self.HEIGHT:
             self.rect.bottom = self.HEIGHT
             self.y_speed = 0
-
 
 
 
@@ -108,8 +96,13 @@ class Player(pygame.sprite.Sprite):
 
         collision = pygame.sprite.spritecollide(self, block_list, False)
 
+        s = 'sounds'
+        chomp = pygame.mixer.Sound(os.path.join(s, 'chomp.wav'))
+
         # traverses the list of blocks that the Player() collided with
         for collided in collision:
+            pygame.mixer.Sound.play(chomp)
+
             collided.kill()
             self.score += 1
 
@@ -130,8 +123,15 @@ class Player(pygame.sprite.Sprite):
         # check for a collision between PacMan and the ghosts
         collision = pygame.sprite.spritecollide(self, ghost_list, False)
 
+        # load the death sound
+        s = 'sounds'
+        death = pygame.mixer.Sound(os.path.join(s, 'death.wav'))
+
         if len(collision) > 0:
+            pygame.mixer.Sound.play(death)
             self.lives -= 1
+            self.x_speed = 0
+            self.y_speed = 0
 
             if self.lives == 0:
                 pygame.quit()
