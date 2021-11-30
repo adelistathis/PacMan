@@ -114,9 +114,6 @@ class Player(pygame.sprite.Sprite):
             self.score += 1
 
         # If the player's score equals the number of blocks on the board
-        if self.score == 210:
-            pygame.quit()
-            sys.exit()
         return frames
 
     def die(self, ghost_list):
@@ -142,17 +139,18 @@ class Player(pygame.sprite.Sprite):
             self.x_speed = 0
             self.y_speed = 0
 
-            if self.lives == 0:
-                gameOver = True
+
 
             # Move the Player to their original position
             self.rect.centerx = 303
             self.rect.centery = 275
 
-            return (True,gameOver)
+            return (True)
 
-        return (False,gameOver)
+        return (False)
 
+    def hasLives(self):
+        return self.lives > 0
 
 
 
