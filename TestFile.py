@@ -19,13 +19,14 @@ RED = pygame.Color(255, 0, 0)
 ORANGE = pygame.Color(255, 165, 0)
 YELLOW = (255, 255, 0)
 framesSinceSound = 0
+
 # instantiate the Player() and Ghost() objects
-#pac = Player(xIn=30, yIn=30, lives=3)
-#inky = Ghost(fileName='inky.png', x=285, y=75)
-#blinky = Ghost(fileName='blinky.png', x=285, y=75)
-#pinky = Ghost(fileName='pinky.png', x=285, y=75)
-#clyde = Ghost(fileName='clyde.png', x=285, y=195)
-#drinky = Ghost(fileName='drinky.png', x=285, y=195)
+# pac = Player(xIn=30, yIn=30, lives=3)
+# inky = Ghost(fileName='inky.png', x=285, y=75)
+# blinky = Ghost(fileName='blinky.png', x=285, y=75)
+# pinky = Ghost(fileName='pinky.png', x=285, y=75)
+# clyde = Ghost(fileName='clyde.png', x=285, y=195)
+# drinky = Ghost(fileName='drinky.png', x=285, y=195)
 
 
 
