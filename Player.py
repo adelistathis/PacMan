@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
         if self.x_speed > 0 :
             self.image = self.rightImage.copy()
 
-    def eat_block(self, frames , block_list):
+    def eat_block(self, frames, block_list):
         """Gives the player the ability to eat Block() sprites
 
         :param block_list: a Group containing all of the Block() sprites in the game
@@ -99,7 +99,7 @@ class Player(pygame.sprite.Sprite):
 
         # traverses the list of blocks that the Player() collided with
         for collided in collision:
-            if(frames > 30):
+            if frames > 30:
                 pygame.mixer.Sound.play(chomp)
                 frames = 0
 
