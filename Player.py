@@ -68,7 +68,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.x_speed
         self.rect.y += self.y_speed
 
-        #handles wall collisions
+        # handles wall collisions
         hits = pygame.sprite.spritecollide(self, wall_list, False)
         # if there was a collision between the Player() object and a Wall() object
         if hits:
@@ -111,7 +111,6 @@ class Player(pygame.sprite.Sprite):
         return frames
 
     def die(self, ghost_list):
-        gameOver=False
         """'kills' the Player() object if they collide with a ghost by reducing their # of lives and redrawing them
         on the screen
 
@@ -119,6 +118,8 @@ class Player(pygame.sprite.Sprite):
 
         :param ghost_list: a Group containing all of the Ghost() sprites in the game
         """
+
+        gameOver = False
 
         # check for a collision between PacMan and the ghosts
         collision = pygame.sprite.spritecollide(self, ghost_list, False)
@@ -132,8 +133,6 @@ class Player(pygame.sprite.Sprite):
             self.lives -= 1
             self.x_speed = 0
             self.y_speed = 0
-
-
 
             # Move the Player to their original position
             self.rect.centerx = 303
