@@ -4,7 +4,7 @@ from Block import Block
 
 pygame.init()
 
-BLUE = (0, 0, 255)
+BLUE = pygame.Color(0, 0, 255)
 ORANGE = pygame.Color(255, 165, 0)
 
 

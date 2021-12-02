@@ -1,9 +1,6 @@
 import pygame
 
 
-BLUE = (0, 0, 255)
-
-
 # This class represents the bar at the bottom that the player controls
 class Wall(pygame.sprite.Sprite):
     # Constructor function

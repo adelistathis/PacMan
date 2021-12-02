@@ -1,4 +1,3 @@
-import sys
 import pygame
 import os
 
@@ -119,8 +118,6 @@ class Player(pygame.sprite.Sprite):
         :param ghost_list: a Group containing all of the Ghost() sprites in the game
         """
 
-        gameOver = False
-
         # check for a collision between PacMan and the ghosts
         collision = pygame.sprite.spritecollide(self, ghost_list, False)
 
@@ -134,7 +131,7 @@ class Player(pygame.sprite.Sprite):
             self.x_speed = 0
             self.y_speed = 0
 
-            # Move the Player to their original position
+            # Move the Player's sprite to their starting position
             self.rect.centerx = 303
             self.rect.centery = 275
 
@@ -143,6 +140,10 @@ class Player(pygame.sprite.Sprite):
         return (False)
 
     def hasLives(self):
+        """checks if the player still has lives left
+
+        :return: a boolean value that is True if the player still has lives, and False if they do not
+        """
         return self.lives > 0
 
 
